@@ -24,6 +24,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { PhotoUpload } from "@/components/admin/photo-upload";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -241,10 +242,12 @@ export function ProjectsManager({ rows }: { rows: Project[] }) {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
-              <div className="space-y-1.5">
-                <Label htmlFor="p-img">URL Gambar</Label>
-                <Input id="p-img" name="image_url" defaultValue={editing?.image_url} placeholder="https://..." />
-              </div>
+              <PhotoUpload
+                name="image_url"
+                initial={editing?.image_url ?? ""}
+                folder="proyek"
+                label="Gambar Proyek"
+              />
               <div className="space-y-1.5">
                 <Label htmlFor="p-order">Urutan</Label>
                 <Input id="p-order" name="sort_order" type="number" defaultValue={editing?.sort_order ?? 0} className="sm:w-20" />

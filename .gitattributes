@@ -1,0 +1,19 @@
+# Normalisasi akhir baris: berkas teks disimpan sebagai LF di repo,
+# dan check-out juga tetap LF (tidak dikonversi ke CRLF oleh autocrlf Windows).
+* text=auto eol=lf
+
+# Skrip Windows memang harus CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Aset biner — dilarang keras dikonversi/didiff.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary

@@ -272,3 +272,10 @@ on conflict do nothing;
 --       update public.profiles set role = 'admin'
 --       where id = (select id from auth.users where email = 'admin@portofolio.com');
 -- ============================================================
+
+-- ---------- storage: bucket "media" untuk foto (avatar & gambar proyek) ----------
+-- Bucket PUBLIC supaya URL gambar bisa dibaca siapa pun (tampil di situs).
+-- Penulisan hanya lewat service role (dashboard admin), jadi tidak perlu policy insert.
+insert into storage.buckets (id, name, public)
+values ('media', 'media', true)
+on conflict (id) do nothing;

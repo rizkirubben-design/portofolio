@@ -1,4 +1,5 @@
 import { GraduationCapIcon, BriefcaseIcon } from "lucide-react";
+import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Badge } from "@/components/ui/badge";
 import type { Education, Experience } from "@/lib/types";
@@ -15,12 +16,15 @@ function TimelineItem({
   period,
   description,
   badge,
+  delay = 0,
 }: {
   title: string;
   subtitle: string;
   period: string | null;
   description: string | null;
   badge?: string;
+  /** Tanda telat untuk animasi muncul berurutan. */
+  delay?: number;
 }) {
   return (
     <li className="relative pl-8">
@@ -30,21 +34,23 @@ function TimelineItem({
       </span>
       <span className="absolute left-[6.5px] top-5 h-[calc(100%-1rem)] w-px bg-border" aria-hidden />
 
-      <div className="space-y-1">
-        <div className="flex flex-wrap items-center gap-2">
-          <h3 className="font-medium leading-snug">{title}</h3>
-          {badge && (
-            <Badge variant="outline" className="h-4 px-1.5 text-[10px] uppercase tracking-wide">
-              {badge}
-            </Badge>
-          )}
+      <Reveal delay={delay}>
+        <div className="space-y-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="font-medium leading-snug">{title}</h3>
+            {badge && (
+              <Badge variant="outline" className="h-4 px-1.5 text-[10px] uppercase tracking-wide">
+                {badge}
+              </Badge>
+            )}
+          </div>
+          <p className="text-sm text-muted-foreground">
+            {subtitle}
+            {period && <span className="text-xs"> · {period}</span>}
+          </p>
+          {description && <p className="text-sm text-muted-foreground/80">{description}</p>}
         </div>
-        <p className="text-sm text-muted-foreground">
-          {subtitle}
-          {period && <span className="text-xs"> · {period}</span>}
-        </p>
-        {description && <p className="text-sm text-muted-foreground/80">{description}</p>}
-      </div>
+      </Reveal>
     </li>
   );
 }
@@ -57,7 +63,7 @@ export function Timeline({
   education: Education[];
 }) {
   return (
-    <section id="pengalaman" className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+    <section id="pengalaman" className="mx-auto max-w-5xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24">
       <SectionHeading
         eyebrow="Perjalanan"
         title="Pengalaman & Pendidikan"
@@ -74,9 +80,10 @@ export function Timeline({
             <p className="text-sm text-muted-foreground">Belum ada pengalaman.</p>
           ) : (
             <ul className="space-y-6">
-              {experiences.map((e) => (
+              {experiences.map((e, i) => (
                 <TimelineItem
                   key={e.id}
+                  delay={i * 80}
                   badge={kindLabel[e.kind]}
                   title={e.position}
                   subtitle={e.org_name}
@@ -97,9 +104,10 @@ export function Timeline({
             <p className="text-sm text-muted-foreground">Belum ada data pendidikan.</p>
           ) : (
             <ul className="space-y-6">
-              {education.map((d) => (
+              {education.map((d, i) => (
                 <TimelineItem
                   key={d.id}
+                  delay={i * 80}
                   title={d.institution}
                   subtitle={d.major}
                   period={d.period}

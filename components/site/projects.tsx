@@ -4,6 +4,7 @@ import {
   FolderIcon,
 } from "lucide-react";
 import { GithubIcon } from "@/components/site/brand-icons";
+import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,7 @@ import type { Project } from "@/lib/types";
 
 export function Projects({ projects }: { projects: Project[] }) {
   return (
-    <section id="proyek" className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+    <section id="proyek" className="mx-auto max-w-5xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24">
       <SectionHeading
         eyebrow="Proyek"
         title="Proyek pilihan"
@@ -25,16 +26,17 @@ export function Projects({ projects }: { projects: Project[] }) {
         </p>
       ) : (
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <Card key={project.id} className="p-0 has-[>a]:transition-transform hover:ring-primary/40">
-              <div className="relative aspect-video w-full overflow-hidden rounded-t-xl bg-linear-to-br from-violet-500/25 to-blue-500/25">
+          {projects.map((project, i) => (
+            <Reveal key={project.id} delay={(i % 3) * 90} className="h-full">
+              <Card className="group h-full overflow-hidden p-0 transition-all duration-300 hover:-translate-y-1 hover:ring-primary/40">
+              <div className="relative aspect-video w-full overflow-hidden rounded-t-xl bg-primary/10">
                 {project.image_url ? (
                   <Image
                     src={project.image_url}
                     alt={`Gambar proyek ${project.title}`}
                     fill
                     sizes="(max-width: 640px) 100vw, 380px"
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                   />
                 ) : (
                   <div className="flex size-full items-center justify-center text-3xl text-primary/70">
@@ -79,6 +81,7 @@ export function Projects({ projects }: { projects: Project[] }) {
                 )}
               </CardFooter>
             </Card>
+            </Reveal>
           ))}
         </div>
       )}

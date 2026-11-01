@@ -28,7 +28,7 @@ Buka `http://localhost:3000`.
    - **anon public key** → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 3. Buat file `.env.local` di root proyek (atau salin dari `.env.example`), isi kedua variabel di atas.
 4. Restart dev server (`Ctrl+C` lalu `npm run dev`).
-5. Di dashboard Supabase → **SQL Editor → New Query**, paste seluruh isi `supabase/schema.sql`, lalu **Run**. Ini membuat tabel, RLS, dan data dummy.
+5. Di dashboard Supabase → **SQL Editor → New Query**, paste seluruh isi `supabase/schema.sql`, lalu **Run**. Ini membuat tabel, RLS, data dummy, **dan bucket storage `media`** untuk foto. (File ini idempotent — boleh dijalankan ulang kapan saja.)
 
 ### Menjadikan akun admin
 

@@ -1,5 +1,6 @@
-import { ArrowUpRightIcon, MailIcon } from "lucide-react";
+import { MailIcon } from "lucide-react";
 import { socialIcon, socialLinks } from "@/components/site/social";
+import { Reveal } from "@/components/site/reveal";
 import { Year } from "@/components/site/year";
 import { Button } from "@/components/ui/button";
 import type { SiteSettings } from "@/lib/types";
@@ -10,19 +11,12 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
   const links = settings ? socialLinks(settings) : [];
 
   return (
-    <footer id="kontak" className="border-t border-border/60">
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-        <div className="space-y-6 text-center">
+    <footer id="kontak" className="scroll-mt-20 border-t border-border/60">
+      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
+        <Reveal className="flex flex-col items-center gap-6 text-center">
           <span className="text-xs font-medium uppercase tracking-widest text-primary">
             Kontak
           </span>
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-            Mari terhubung
-          </h2>
-          <p className="mx-auto max-w-xl text-sm text-muted-foreground sm:text-base">
-            Terbuka untuk peluang magang, proyek kolaborasi, atau sekadar diskusi
-            tentang web development.
-          </p>
 
           {email ? (
             <Button asChild size="lg" variant="outline" className="mx-auto">
@@ -37,7 +31,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
           )}
 
           {links.length > 0 && (
-            <div className="flex items-center justify-center gap-2 pt-2">
+            <div className="flex items-center justify-center gap-2">
               {links.map((link) => (
                 <Button
                   key={link.kind}
@@ -54,11 +48,10 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
             </div>
           )}
 
-          <p className="flex items-center justify-center gap-1 pt-4 text-xs text-muted-foreground">
-            © <Year /> {name} · Dibangun dengan Next.js &amp; Supabase
-            <ArrowUpRightIcon className="size-3" />
+          <p className="pt-4 text-xs text-muted-foreground">
+            © <Year /> {name}
           </p>
-        </div>
+        </Reveal>
       </div>
     </footer>
   );

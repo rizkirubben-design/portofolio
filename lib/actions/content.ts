@@ -1,6 +1,6 @@
 "use server";
 
-import { redirect } from "next/navigation";
+import { redirect, unstable_rethrow } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/server";
 import { hasAdminSession } from "@/lib/admin-session";
@@ -36,6 +36,9 @@ function crudOk(): FormState {
 }
 
 function fail(error: unknown): FormState {
+  // Biarkan error framework (mis. redirect() dari requireAdmin) tetap bekerja,
+  // jangan ditelan oleh try/catch.
+  unstable_rethrow(error);
   return { error: error instanceof Error ? error.message : "Terjadi kesalahan." };
 }
 

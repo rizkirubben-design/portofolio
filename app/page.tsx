@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { InfoIcon } from "lucide-react";
 import { Navbar } from "@/components/site/navbar";
+import { Reveal } from "@/components/site/reveal";
 import { Hero } from "@/components/site/hero";
 import { About } from "@/components/site/about";
 import { Skills } from "@/components/site/skills";
@@ -53,19 +54,30 @@ async function PortfolioContent() {
 
   return (
     <>
-      <Navbar displayName={settings?.display_name ?? ""} />
-      <Hero settings={settings} />
+      <Navbar
+        displayName={settings?.display_name ?? ""}
+        avatarUrl={settings?.avatar_url ?? ""}
+      />
+      <Hero settings={settings} skills={skills} />
       <main>
         {error && (
-          <div className="mx-auto flex w-full max-w-5xl items-start gap-3 rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+          <div className="mx-auto flex w-full max-w-5xl items-start gap-3 rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-700">
             <InfoIcon className="mt-0.5 size-4 shrink-0" />
             <p>{error}</p>
           </div>
         )}
-        <About settings={settings} />
-        <Skills skills={skills} />
-        <Projects projects={projects} />
-        <Timeline experiences={experiences} education={education} />
+        <Reveal>
+          <About settings={settings} />
+        </Reveal>
+        <Reveal>
+          <Skills skills={skills} />
+        </Reveal>
+        <Reveal>
+          <Projects projects={projects} />
+        </Reveal>
+        <Reveal>
+          <Timeline experiences={experiences} education={education} />
+        </Reveal>
       </main>
       <Footer settings={settings} />
     </>

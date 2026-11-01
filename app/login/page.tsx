@@ -13,7 +13,7 @@ export default function LoginPage() {
     <div className="flex min-h-full w-full items-center justify-center px-4 py-24">
       <Card className="w-full max-w-sm">
         <CardHeader className="items-center text-center">
-          <div className="mb-1 flex size-10 items-center justify-center rounded-xl bg-linear-to-br from-violet-500 to-blue-500 text-primary-foreground">
+          <div className="mb-1 flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <LogInIcon className="size-5" />
           </div>
           <CardTitle className="text-lg">Masuk Admin</CardTitle>

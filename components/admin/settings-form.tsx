@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { PhotoUpload } from "@/components/admin/photo-upload";
 
 export function SettingsForm({ settings }: { settings: SiteSettings | null }) {
   const [submitting, startSaving] = useTransition();
@@ -45,9 +46,13 @@ export function SettingsForm({ settings }: { settings: SiteSettings | null }) {
         />
       </div>
 
-      <div className="space-y-1.5">
-        <Label htmlFor="avatar_url">URL Foto / Avatar</Label>
-        <Input id="avatar_url" name="avatar_url" defaultValue={settings?.avatar_url ?? ""} placeholder="https://..." />
+      <div className="w-fit">
+        <PhotoUpload
+          name="avatar_url"
+          initial={settings?.avatar_url ?? ""}
+          folder="avatar"
+          label="Foto Profil"
+        />
       </div>
 
       <div className="space-y-1.5">

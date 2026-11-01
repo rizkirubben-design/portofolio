@@ -75,7 +75,7 @@ export function AdminShell({
       {/* Sidebar desktop */}
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-56 flex-col border-r border-border/60 bg-sidebar md:flex">
         <div className="flex h-14 items-center gap-2 border-b border-border/60 px-4">
-          <span className="flex size-7 items-center justify-center rounded-lg bg-linear-to-br from-violet-500 to-blue-500 text-xs font-semibold text-primary-foreground">
+          <span className="flex size-7 items-center justify-center rounded-lg bg-primary text-xs font-semibold text-primary-foreground">
             P
           </span>
           <span className="text-sm font-semibold">Portofolio Admin</span>
@@ -120,7 +120,7 @@ export function AdminShell({
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className="gap-2">
-                  <span className="flex size-5 items-center justify-center rounded-full bg-linear-to-br from-violet-500 to-blue-500 text-[10px] font-semibold text-primary-foreground">
+                  <span className="flex size-5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">
                     {(user.name || user.email || "A").charAt(0).toUpperCase()}
                   </span>
                   <span className="max-w-32 truncate">{user.name || "Admin"}</span>
