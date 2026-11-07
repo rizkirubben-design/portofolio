@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Bricolage_Grotesque, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Marcellus, Amiri } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
-const jakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const sansFont = Plus_Jakarta_Sans({
+  variable: "--font-sans-base",
   subsets: ["latin"],
 });
 
-const bricolageHeading = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const andalusiaHeading = Marcellus({
+  variable: "--font-andalusia",
+  weight: "400",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const amiriFont = Amiri({
+  variable: "--font-amiri",
+  weight: ["400", "700"],
+  subsets: ["arabic", "latin"],
 });
 
 export const metadata: Metadata = {
@@ -30,9 +32,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="id"
-      className={`${jakartaSans.variable} ${bricolageHeading.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${sansFont.variable} ${andalusiaHeading.variable} ${amiriFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-background text-foreground font-sans selection:bg-primary/20 selection:text-primary">
         {children}
         <Toaster position="top-center" richColors />
       </body>

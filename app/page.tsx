@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { InfoIcon } from "lucide-react";
 import { Navbar } from "@/components/site/navbar";
 import { Reveal } from "@/components/site/reveal";
@@ -49,6 +50,7 @@ function PortfolioSkeleton() {
 }
 
 async function PortfolioContent() {
+  await connection();
   const { settings, skills, projects, experiences, education, error } =
     await getPortfolioData();
 

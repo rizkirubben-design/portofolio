@@ -7,42 +7,74 @@ export function About({ settings }: { settings: SiteSettings | null }) {
   const bio = settings?.bio?.trim();
 
   return (
-    <section id="tentang" className="mx-auto max-w-5xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24">
+    <section id="tentang" className="relative mx-auto max-w-5xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24">
       <SectionHeading
-        eyebrow="Tentang"
-        title="Kenalan lebih dekat"
-        description="Cerita singkat tentang latar belakang, minat, dan apa yang saya kerjakan."
+        eyebrow="Tarjamah · السيرة"
+        title="Kisah, Falsafah & Dedikasi Karya"
+        description="Perjalanan tentang ketelitian karsa, komitmen intelektual, dan harmoni estetika Andalusia."
       />
 
-      <Reveal className="mt-8 grid gap-8 sm:grid-cols-[auto_1fr] sm:items-start">
-        <div className="relative mx-auto size-32 overflow-hidden rounded-2xl ring-1 ring-foreground/10 sm:mx-0 sm:size-40">
-          {settings?.avatar_url ? (
-            <Image
-              src={settings.avatar_url}
-              alt={`Foto ${settings.display_name || "profil"}`}
-              fill
-              sizes="160px"
-              className="object-cover"
-            />
-          ) : (
-            <div className="flex size-full items-center justify-center bg-primary/15 text-4xl font-semibold text-primary">
-              {(settings?.display_name || "A").trim().charAt(0).toUpperCase()}
-            </div>
-          )}
-        </div>
+      <Reveal className="mt-8 rounded-3xl border border-primary/25 bg-card/85 p-6 sm:p-8 backdrop-blur-md relative overflow-hidden shadow-xl shadow-primary/5">
+        {/* Ornamen sudut Arabesque */}
+        <div className="absolute top-3 left-3 text-accent text-sm select-none">۞</div>
+        <div className="absolute top-3 right-3 text-accent text-sm select-none">۞</div>
+        <div className="absolute bottom-3 left-3 text-accent text-sm select-none">۞</div>
+        <div className="absolute bottom-3 right-3 text-accent text-sm select-none">۞</div>
 
-        <div className="space-y-4">
-          {bio ? (
-            <div className="space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              {bio.split(/\n{2,}|\n/).map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
-              ))}
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+          {/* Kolom potret gerbang kubah */}
+          <div className="flex flex-col items-center justify-center lg:col-span-4">
+            <div className="relative size-40 sm:size-48 overflow-hidden andalusia-arch rounded-b-2xl border-2 border-primary/30 p-1.5 bg-background shadow-md">
+              <div className="relative size-full overflow-hidden andalusia-arch rounded-b-xl">
+                {settings?.avatar_url ? (
+                  <Image
+                    src={settings.avatar_url}
+                    alt={`Foto ${settings.display_name || "profil"}`}
+                    fill
+                    sizes="192px"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="flex size-full items-center justify-center bg-primary/10 font-serif text-5xl font-bold text-accent">
+                    {(settings?.display_name || "A").trim().charAt(0).toUpperCase()}
+                  </div>
+                )}
+              </div>
             </div>
-          ) : (
-            <p className="text-sm text-muted-foreground">
-              Bio belum diisi. Atur melalui dashboard admin.
-            </p>
-          )}
+
+            <div className="mt-4 text-center">
+              <span className="font-serif text-xs font-bold text-accent">
+                صاحب الديوان
+              </span>
+              <p className="font-heading text-sm font-semibold text-foreground">
+                {settings?.display_name || "Profil"}
+              </p>
+            </div>
+          </div>
+
+          {/* Kolom narasi */}
+          <div className="space-y-4 lg:col-span-8 border-t border-border/80 pt-6 lg:border-t-0 lg:border-l lg:pl-8 lg:pt-0">
+            <div className="flex items-center gap-2 border-b border-border/80 pb-3">
+              <span className="font-serif text-base text-accent font-bold">
+                مجلس الفكر والبيان
+              </span>
+              <span className="text-muted-foreground text-xs font-sans tracking-wide">
+                · Falsafah & Visi Intelektual
+              </span>
+            </div>
+
+            {bio ? (
+              <div className="space-y-3.5 text-sm leading-relaxed text-muted-foreground sm:text-base font-normal">
+                {bio.split(/\n{2,}|\n/).map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                Bio belum diisi. Atur melalui dashboard admin.
+              </p>
+            )}
+          </div>
         </div>
       </Reveal>
     </section>
